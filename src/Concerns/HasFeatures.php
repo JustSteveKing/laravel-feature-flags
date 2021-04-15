@@ -12,7 +12,7 @@ trait HasFeatures
 {
     public function inGroup(string $groupName)
     {
-        //
+        return $this->groups->contains('name', $groupName);
     }
 
     public function giveFeature(string $featureName)
