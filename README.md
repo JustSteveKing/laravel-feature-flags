@@ -35,6 +35,12 @@ return [
 ];
 ```
 
+You will then need to migrate the database changes:
+
+```bash
+php artisan migrate
+```
+
 ## Usage
 
 This package allows you to manage user features and feature groups in a database.
