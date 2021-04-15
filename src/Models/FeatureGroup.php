@@ -23,6 +23,11 @@ class FeatureGroup extends Model
         'active' => 'boolean',
     ];
 
+    public function addFeature(Feature $feature)
+    {
+        return $this->feature()->sync($feature);
+    }
+
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(
