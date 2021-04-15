@@ -90,6 +90,14 @@ $group->addFeature($feature);
 
 // Assign a User to the Group
 auth()->user()->joinGroup($group->name);
+
+if (auth()->user()->groupHasFeature('api access')) {
+    // The user belongs to a group that has access to this feature.
+}
+
+if (auth()->user()->hasFeature('run reports')) {
+    // The user has been given access to this feature outside of group features
+}
 ```
 
 ## Testing

@@ -10,6 +10,10 @@ use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 trait HasFeatures
 {
+    /**
+     * User Feature Groups
+     */
+
     public function leaveGroup(string $groupName)
     {
         return $this->groups()->detach(FeatureGroup::name($groupName)->first()->id);
@@ -31,6 +35,15 @@ trait HasFeatures
     {
         return $this->groups->contains('name', $groupName);
     }
+
+    public function groupHasFeature(string $featureName): bool
+    {
+        return $this->groups->features->contains('name', $featureName);
+    }
+
+    /**
+     * User Features
+     */
 
     public function giveFeature(string $featureName)
     {
