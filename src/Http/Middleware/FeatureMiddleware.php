@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class FeatureMiddleware
 {
-    public function handle(Request $request, Closure $next, string $feature): mixed
+    public function handle(Request $request, Closure $next, string ...$features): mixed
     {
-        dd($feature);
+        dd($features);
         return $next($request);
     }
 }
