@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class FeatureFlagsServiceProvider extends PackageServiceProvider
+class FeatureFlagsServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function register()
     {
-        $package
-            ->name('feature-flags')
-            ->hasCommands()
-            ->hasMigrations([
-                'create_features_table'
-            ]);
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    public function boot()
+    {
+        //
     }
 }
