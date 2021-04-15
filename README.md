@@ -1,7 +1,8 @@
 # Laravel Feature Flags
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
+[![PHP Version](https://img.shields.io/packagist/php-v/juststeveking/laravel-feature-flags.svg?style=flat-square)](https://php.net)
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 A simple to use Feature Flag package for Laravel 
