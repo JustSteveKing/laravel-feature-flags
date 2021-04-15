@@ -17,6 +17,7 @@ class AddFeatureGroup extends Command
     {
         $groupName = $this->ask('Group Name');
         $description = $this->ask('Group Description');
+        $active = $this->choice('Is the group active', ['yes', 'no'], 'no');
 
         $existingGroup = FeatureGroup::name($groupName)->first();
 
@@ -28,6 +29,7 @@ class AddFeatureGroup extends Command
         FeatureGroup::create([
             'name' => $groupName,
             'description' => $description,
+            'active' => $active == 'yes',
         ]);
 
         $this->info("Created '{$groupName}' group");
