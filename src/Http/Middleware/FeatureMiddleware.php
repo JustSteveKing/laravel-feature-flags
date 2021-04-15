@@ -11,7 +11,12 @@ class FeatureMiddleware
 {
     public function handle(Request $request, Closure $next, string ...$features): mixed
     {
-        dd($features);
+        foreach ($features as $feature) {
+            if (! auth()->user()->hasFeature($feature)) {
+                return redirect()->back();
+            }
+        }
+
         return $next($request);
     }
 }
