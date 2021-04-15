@@ -6,6 +6,7 @@ namespace JustSteveKing\Laravel\FeatureFlags;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use JustSteveKing\Laravel\FeatureFlags\Console\AddFeature;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureGroup;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
@@ -48,6 +49,7 @@ class FeatureFlagsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AddFeatureGroup::class,
+                AddFeature::class,
             ]);
         }
     }
