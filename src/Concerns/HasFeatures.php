@@ -9,6 +9,12 @@ use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
 trait HasFeatures
 {
+    public function giveFeature(string $featureName)
+    {
+        return $this->features->attach(Feature::firstOrCreate([
+            'name' => $featureName
+        ]));
+    }
 
     public function hasFeature(string $featureName)
     {
