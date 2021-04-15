@@ -18,6 +18,6 @@ class GroupMiddleware
             }
         }
 
-        return abort(403);
+        return abort(config('feature-flag.middleware.status_code'));
     }
 }

@@ -16,6 +16,10 @@ class FeatureFlagsServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/../config/feature-flag.php' => config_path('feature-flag.php')
+        ], 'config');
+
         Blade::directive('feature', function ($feature) {
             return "<?php if (auth()->check() && auth()->user()->hasFeature({$feature})): ?>";
         });

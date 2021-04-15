@@ -14,7 +14,7 @@ class FeatureMiddleware
     {
         foreach ($features as $feature) {
             if (! auth()->user()->hasFeature(Str::replaceFirst('-', ' ', $feature))) {
-                return abort(403);
+                return abort(config('feature-flag.middleware.status_code'));
             }
         }
 
