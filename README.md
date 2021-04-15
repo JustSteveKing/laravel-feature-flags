@@ -189,7 +189,7 @@ protected $routeMiddleware = [
 
 You can pass through more than one feature group name, and pass them in a friendlier format or as they are:
 
-```
+```php
 Route::middleware(['feature-group:beta-testers,internal,developer advocates'])->group(/* */);
 ```
 
