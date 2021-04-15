@@ -7,7 +7,7 @@ namespace JustSteveKing\Laravel\FeatureFlags\Models\Builders;
 use Illuminate\Database\Eloquent\Builder;
 use JustSteveKing\Laravel\FeatureFlags\Models\Builders\Concerns\HasActiveAndInactive;
 
-class FeatureBuilder extends Builder
+class FeatureGroupBuilder extends Builder
 {
     use HasActiveAndInactive;
 }
