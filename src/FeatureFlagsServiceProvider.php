@@ -13,8 +13,9 @@ class FeatureFlagsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('feature-flags')
-            ->hasConfigFile()
             ->hasCommands()
-            ->hasMigrations();
+            ->hasMigrations([
+                'create_features_table'
+            ]);
     }
 }
