@@ -100,6 +100,27 @@ if (auth()->user()->hasFeature('run reports')) {
 }
 ```
 
+## Template Usage
+
+There are some Blade Directives to help control access to features in your UI:
+
+```php
+// You can check if a user has a specific feature
+@feature('api access')
+    <x-api-console />
+@endfeature
+
+// You can check if a user is a member of a feature group
+@featuregroup('beta testers')
+    <x-group-feature />
+@endfeaturegroup
+
+// You can check if a user is a member of a group with access to a feature
+@groupfeature('api access')
+    <x-api-console />
+@endgroupfeature
+```
+
 ## Testing
 
 ``` bash
