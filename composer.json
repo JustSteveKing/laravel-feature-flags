@@ -17,8 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/contracts": "^8.0",
-        "spatie/laravel-package-tools": "^1.6"
+        "illuminate/contracts": "^8.0"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
