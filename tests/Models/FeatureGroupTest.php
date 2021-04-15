@@ -24,6 +24,21 @@ class FeatureGroupTest extends TestCase
     /**
      * @test
      */
+    public function it_normalises_the_name()
+    {
+        FeatureGroup::create([
+            'name' => 'Test Feature GROUP',
+        ]);
+
+        $this->assertEquals(
+            'test feature group',
+            FeatureGroup::first()->name
+        );
+    }
+
+    /**
+     * @test
+     */
     public function it_will_deactivate_a_feature_group()
     {
         FeatureGroup::create([
