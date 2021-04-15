@@ -8,12 +8,12 @@ use Closure;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class FeatureMiddleware
+class GroupMiddleware
 {
-    public function handle(Request $request, Closure $next, string ...$features): mixed
+    public function handle(Request $request, Closure $next, string ...$groups): mixed
     {
-        foreach ($features as $feature) {
-            if (! auth()->user()->hasFeature(Str::replaceFirst('-', ' ', $feature))) {
+        foreach ($groups as $group) {
+            if (! auth()->user()->inGroup(Str::replaceFirst('-', ' ', $group))) {
                 return abort(403);
             }
         }
