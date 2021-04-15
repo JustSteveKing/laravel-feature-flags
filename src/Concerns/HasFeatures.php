@@ -12,7 +12,7 @@ trait HasFeatures
 {
     public function leaveGroup(string $groupName)
     {
-        return $this->groups->detach(FeatureGroup::name($groupName)->first()->id);
+        return $this->groups()->detach(FeatureGroup::name($groupName)->first()->id);
     }
 
     public function addToGroup(string $groupName)
