@@ -10,6 +10,13 @@ use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 trait HasFeatures
 {
+    public function addToGroup(string $groupName)
+    {
+        return $this->groups()->sync(FeatureGroup::firstOrCreate([
+            'name' => $groupName
+        ]));
+    }
+
     public function inGroup(string $groupName)
     {
         return $this->groups->contains('name', $groupName);
