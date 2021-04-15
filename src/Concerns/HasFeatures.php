@@ -6,6 +6,7 @@ namespace JustSteveKing\Laravel\FeatureFlags\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
+use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 trait HasFeatures
 {
@@ -31,6 +32,14 @@ trait HasFeatures
         return $this->belongsToMany(
             Feature::class,
             'feature_user'
+        );
+    }
+
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            FeatureGroup::class,
+            'feature_group_user',
         );
     }
 }

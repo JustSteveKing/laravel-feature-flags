@@ -6,6 +6,7 @@ namespace JustSteveKing\Laravel\FeatureFlags\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User;
 use JustSteveKing\Laravel\FeatureFlags\Models\Concerns\NormaliseName;
 use JustSteveKing\Laravel\FeatureFlags\Models\Builders\FeatureGroupBuilder;
 
@@ -33,6 +34,14 @@ class FeatureGroup extends Model
         return $this->belongsToMany(
             Feature::class,
             'feature_feature_group',
+        );
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'feature_group_user',
         );
     }
 
