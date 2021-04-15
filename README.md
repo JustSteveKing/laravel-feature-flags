@@ -9,9 +9,18 @@ A simple to use Feature Flag package for Laravel
 
 ## Installation
 
+You can install the package via composer:
+
 ```bash
 composer require juststeveking/laravel-feature-flags
 ```
+
+You can publish the config file with:
+
+```bash
+php artisan vendor:publish --provider="JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider"
+```
+
 
 ## Usage
 
@@ -124,6 +133,20 @@ There are some Blade Directives to help control access to features in your UI:
 ## Middleware
 
 There are some middleware classes that you can use:
+
+By default you can use:
+
+- `\JustSteveKing\Laravel\FeatureFlags\Http\Middleware\FeatureMiddleware::class`
+- `\JustSteveKing\Laravel\FeatureFlags\Http\Middleware\GroupMiddleware::class`
+
+There 2 middleware classes will either abort on failure, or redirect. The way these work can be managed in the config file for the package. It allows you to set a mode for the middleware (either `abort` or `redirect`) and also allows you to set a `redirect_route` or `status_code`.
+
+Then there is also:
+
+- `\JustSteveKing\Laravel\FeatureFlags\Http\Middleware\API\FeatureMiddleware::class`
+- `\JustSteveKing\Laravel\FeatureFlags\Http\Middleware\API\GroupMiddleware::class`
+
+These 2 middleware classes only have the one mode of `abort` but will ready from your config file for the package to know what status code to return, these classes are made specifically for APIs.
 
 ### To limit access to users with specific features
 

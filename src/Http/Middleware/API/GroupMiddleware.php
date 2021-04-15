@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JustSteveKing\Laravel\FeatureFlags\Http\Middleware;
+namespace JustSteveKing\Laravel\FeatureFlags\Http\Middleware\API;
 
 use Closure;
 use Illuminate\Support\Str;
@@ -18,10 +18,6 @@ class GroupMiddleware
             }
         }
 
-        if (config('feature-flag.middleware.mode') === 'abort') {
-            return abort(config('feature-flag.middleware.status_code'));
-        }
-
-        return redirect(config('feature-flag.middleware.redirect_route'));
+        return abort(config('feature-flag.middleware.status_code'));
     }
 }
