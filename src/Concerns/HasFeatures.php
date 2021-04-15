@@ -11,7 +11,7 @@ trait HasFeatures
 {
     public function giveFeature(string $featureName)
     {
-        return $this->features->attach(Feature::firstOrCreate([
+        return $this->features()->attach(Feature::firstOrCreate([
             'name' => $featureName
         ]));
     }
