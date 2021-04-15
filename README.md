@@ -21,6 +21,19 @@ You can publish the config file with:
 php artisan vendor:publish --provider="JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider"
 ```
 
+This is the contents of the published config file:
+
+```php
+return [
+    'middleware' => [
+        'mode' => 'abort',
+
+        'redirect_route' => '/',
+
+        'status_code' => 404,
+    ],
+];
+```
 
 ## Usage
 
