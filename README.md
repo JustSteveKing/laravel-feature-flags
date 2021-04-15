@@ -177,7 +177,6 @@ You can pass through more than one feature name, and pass them in a friendlier f
 Route::middleware(['feature:run-reports,print reports'])->group(/* */);
 ```
 
-
 ### To limit access to users who are part of a feature group
 
 Add the following to your `app/Http/Kernel.php`
@@ -186,11 +185,13 @@ Add the following to your `app/Http/Kernel.php`
 protected $routeMiddleware = [
     'feature-group' => \JustSteveKing\Laravel\FeatureFlags\Http\Middleware\GroupMiddleware::class,
 ];
+```
 
 You can pass through more than one feature group name, and pass them in a friendlier format or as they are:
 
+```
 Route::middleware(['feature-group:beta-testers,internal,developer advocates'])->group(/* */);
-
+```
 
 ## Testing
 
