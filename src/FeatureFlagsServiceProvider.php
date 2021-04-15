@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeature;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatures;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureGroup;
+use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatureGroups;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureToGroup;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
@@ -53,6 +54,7 @@ class FeatureFlagsServiceProvider extends ServiceProvider
                 AddFeature::class,
                 ViewFeatures::class,
                 AddFeatureGroup::class,
+                ViewFeatureGroups::class,
                 AddFeatureToGroup::class,
             ]);
         }
