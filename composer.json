@@ -1,0 +1,60 @@
+{
+    "name": "juststeveking/laravel-feature-flags",
+    "description": "A simple to use Feature Flags package for Laravel",
+    "keywords": [
+        "JustSteveKing",
+        "laravel",
+        "laravel-feature-flags"
+    ],
+    "homepage": "https://github.com/JustSteveKing/laravel-feature-flags",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Steve McDougall",
+            "email": "juststevemcd@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.0"
+    },
+    "require-dev": {
+        "brianium/paratest": "^6.2",
+        "nunomaduro/collision": "^5.3",
+        "orchestra/testbench": "^6.15",
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "JustSteveKing\\Laravel\\FeatureFlags\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JustSteveKing\\Laravel\\FeatureFlags\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "psalm": "./vendor/bin/psalm",
+        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
+        "test-coverage": "./vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JustSteveKing\\Laravel\\FeatureFlags\\FeatureFlagsServiceProvider"
+            ],
+            "aliases": {
+                "FeatureFlags": "JustSteveKing\\Laravel\\FeatureFlags\\FeatureFlagsFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
