@@ -13,7 +13,7 @@ use JustSteveKing\Laravel\FeatureFlags\Models\Builders\FeatureGroupBuilder;
 class FeatureGroup extends Model
 {
     use NormaliseName;
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -24,9 +24,9 @@ class FeatureGroup extends Model
         'active' => 'boolean',
     ];
 
-    public function addFeature(Feature $feature): array
+    public function addFeature(Feature $feature): bool|null
     {
-        return $this->features()->sync($feature);
+        return $this->features()->attach($feature);
     }
 
     public function hasFeature(string $featureName): bool
