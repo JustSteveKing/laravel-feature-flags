@@ -25,7 +25,7 @@ class FeatureGroup extends Model
 
     public function addFeature(Feature $feature)
     {
-        return $this->feature()->sync($feature);
+        return $this->features()->sync($feature);
     }
 
     public function features(): BelongsToMany
