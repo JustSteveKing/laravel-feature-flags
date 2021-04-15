@@ -13,11 +13,11 @@ class GroupMiddleware
     public function handle(Request $request, Closure $next, string ...$groups): mixed
     {
         foreach ($groups as $group) {
-            if (! auth()->user()->inGroup(Str::replaceFirst('-', ' ', $group))) {
-                return abort(403);
+            if (auth()->user()->inGroup(Str::replaceFirst('-', ' ', $group))) {
+                return $next($request);
             }
         }
 
-        return $next($request);
+        return abort(403);
     }
 }
