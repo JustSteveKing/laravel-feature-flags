@@ -24,9 +24,19 @@ class FeatureGroup extends Model
         'active' => 'boolean',
     ];
 
-    public function addFeature(Feature $feature)
+    public function addFeature(Feature $feature): array
     {
         return $this->features()->sync($feature);
+    }
+
+    public function hasFeature(string $featureName): bool
+    {
+        return $this->features->contains('name', $featureName);
+    }
+
+    public function removeFeature(Feature $feature): bool
+    {
+        return (bool) $this->features()->detach($feature->id);
     }
 
     public function features(): BelongsToMany

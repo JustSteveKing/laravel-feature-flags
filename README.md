@@ -18,6 +18,9 @@ composer require juststeveking/laravel-feature-flags
 This package allows you to manage user features and feature groups in a database.
 
 
+**All Feature and Feature Group names will be normalised to lower case on save.**
+
+
 To use this package your User model needs to have the `HasFeatures` trait:
 
 ```php
@@ -44,6 +47,9 @@ A *User* can belong to many *Feature Groups*, but can also be assigned access to
 // This will create the Feature Group if not already created and attach the user to it.
 auth()->user()->addToGroup('beta testers');
 
+// Alternatively you can use the following syntax
+auth()->user()->joinGroup('beta testers');
+
 // You can check if a user is a member of a feature group
 auth()->user()->inGroup('beta testers');
 
@@ -63,6 +69,29 @@ auth()->user()->hasFeature('run reports');
 // You can also remove a feature for a user
 auth()->user()->removeFeature('run reports');
 ```
+
+### Putting it together
+
+To use the package as a whole:
+
+```php
+// Create a Feature Group
+$group = FeatureGroup::create([
+    'name' => 'Beta Testers'
+]);
+
+// Create a Feature
+$feature = Feature::create([
+    'name' => 'API Access'
+]);
+
+// Add the Feature to the Feature Group
+$group->addFeature($feature);
+
+// Assign a User to the Group
+auth()->user()->joinGroup($group->name);
+```
+
 ## Testing
 
 ``` bash

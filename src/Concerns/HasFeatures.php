@@ -15,7 +15,12 @@ trait HasFeatures
         return $this->groups()->detach(FeatureGroup::name($groupName)->first()->id);
     }
 
-    public function addToGroup(string $groupName)
+    public function joinGroup(string $groupName): array
+    {
+        return $this->addToGroup($groupName);
+    }
+
+    public function addToGroup(string $groupName): array
     {
         return $this->groups()->sync(FeatureGroup::firstOrCreate([
             'name' => $groupName
