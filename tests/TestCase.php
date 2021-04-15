@@ -12,6 +12,11 @@ class TestCase extends Orchestra
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->artisan(
+            'migrate',
+            ['--database' => 'sqlite']
+        )->run();
     }
 
     protected function getPackageProviders($app)
