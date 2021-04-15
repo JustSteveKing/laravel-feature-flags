@@ -39,6 +39,13 @@ trait HasFeatures
         return $this->features->contains('name', $featureName);
     }
 
+    public function removeFeature(string $featureName)
+    {
+        return $this->features()->detach(Feature::first([
+            'name' => strtolower($featureName)
+        ]));
+    }
+
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(

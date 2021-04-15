@@ -13,6 +13,56 @@ A simple to use Feature Flag package for Laravel
 composer require juststeveking/laravel-feature-flags
 ```
 
+## Usage
+
+This package allows you to manage user features and feature groups in a database.
+
+
+To use this package your User model needs to have the `HasFeatures` trait:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
+
+class User extends Authenticatable
+{
+    use HasFeatures;
+}
+```
+
+This will allow you to manage features and feature groups on your user model.
+
+A *User* can belong to many *Feature Groups*, but can also be assigned access to specific *Features*.
+
+### Working with Feature Groups
+
+```php
+// This will create the Feature Group if not already created and attach the user to it.
+auth()->user()->addToGroup('beta testers');
+
+// You can check if a user is a member of a feature group
+auth()->user()->inGroup('beta testers');
+
+// You can also get a user to leave a feature group
+auth()->user()->leaveGroup('beta testers');
+```
+
+### Working with Features
+
+```php
+// This will create the Feature if not already created and attach the user to it.
+auth()->user()->giveFeature('run reports');
+
+// You can check if a user has a specific feature
+auth()->user()->hasFeature('run reports');
+
+// You can also remove a feature for a user
+auth()->user()->removeFeature('run reports');
+```
 ## Testing
 
 ``` bash
