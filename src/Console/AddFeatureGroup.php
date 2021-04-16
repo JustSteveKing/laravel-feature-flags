@@ -18,7 +18,7 @@ class AddFeatureGroup extends Command
         $groupName = $this->ask('Group Name');
         $existingGroup = FeatureGroup::name($groupName)->first();
 
-        if ($existingGroup) {
+        while ($existingGroup) {
             $this->alert('A group already exists with this name');
             $groupName = $this->ask('Group Name');
             $existingGroup = FeatureGroup::name($groupName)->first();
