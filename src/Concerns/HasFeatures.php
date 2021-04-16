@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace JustSteveKing\Laravel\FeatureFlags\Concerns;
 
 use Illuminate\Support\Arr;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

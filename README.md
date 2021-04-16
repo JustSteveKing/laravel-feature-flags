@@ -83,6 +83,9 @@ auth()->user()->inGroup('beta testers');
 
 // You can also get a user to leave a feature group
 auth()->user()->leaveGroup('beta testers');
+
+// You can also pass in more than one group name
+auth()->user()->joinGroup('beta testers', 'api testers');
 ```
 
 ### Working with Features
@@ -96,6 +99,10 @@ auth()->user()->hasFeature('run reports');
 
 // You can also remove a feature for a user
 auth()->user()->removeFeature('run reports');
+
+// Like with Feature Groups you can pass in more than one option
+// These will return if any are matched.
+auth()->user()->hasFeature('run reports', 'admin');
 ```
 
 ### Putting it together
@@ -125,6 +132,10 @@ if (auth()->user()->groupHasFeature('api access')) {
 
 if (auth()->user()->hasFeature('run reports')) {
     // The user has been given access to this feature outside of group features
+}
+
+if (auth()->user()->hasFeature('user level feature')) {
+    // The user has access to this feature as a user or through a group.
 }
 ```
 
