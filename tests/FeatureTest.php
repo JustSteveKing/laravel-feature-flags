@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Tests;
 
+use Illuminate\Foundation\Auth\User;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
