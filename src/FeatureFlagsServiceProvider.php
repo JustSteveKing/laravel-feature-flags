@@ -11,6 +11,7 @@ use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatures;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatureGroups;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureToGroup;
+use JustSteveKing\Laravel\FeatureFlags\Console\ViewGroupsWithFeatures;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
 {
@@ -56,6 +57,7 @@ class FeatureFlagsServiceProvider extends ServiceProvider
                 AddFeatureGroup::class,
                 ViewFeatureGroups::class,
                 AddFeatureToGroup::class,
+                ViewGroupsWithFeatures::class,
             ]);
         }
     }
