@@ -7,32 +7,32 @@ namespace JustSteveKing\Laravel\FeatureFlags\Console;
 use Illuminate\Console\Command;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
-class ActivateFeature extends Command
+class DeactivateFeature extends Command
 {
-    protected $signature = 'feature-flags:activate-feature';
+    protected $signature = 'feature-flags:deactivate-feature';
 
-    protected $description = 'Activates a feature';
+    protected $description = 'Deactivates a feature';
 
     public function handle()
     {
-        $featureName = $this->ask('Feature name to activate');
+        $featureName = $this->ask('Feature name to deactivate');
         $feature = Feature::name($featureName)->first();
 
         while (!$feature) {
             $this->alert("There is no feature with the name '{$featureName}'");
-            $featureName = $this->ask('Feature name to activate');
+            $featureName = $this->ask('Feature name to deactivate');
             $feature = Feature::name($featureName)->first();
         }
 
-        if ($feature->active) {
-            $this->info("Feature '{$featureName}' is already active.");
+        if (!$feature->active) {
+            $this->info("Feature '{$featureName}' is already inactive.");
             return 0;
         }
 
-        $feature->active = true;
+        $feature->active = false;
         $feature->save();
 
-        $this->info("Feature '{$featureName}' has been successfully activated");
+        $this->info("Feature '{$featureName}' has been successfully deactivated");
 
         return 0;
     }
