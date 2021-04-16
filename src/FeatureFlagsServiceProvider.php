@@ -24,7 +24,7 @@ class FeatureFlagsServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/feature-flags.php' => config_path('feature-flags.php')
-        ], 'config');
+        ], 'feature-flags-config');
 
 
         Blade::directive('feature', function ($feature) {
