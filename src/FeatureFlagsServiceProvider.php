@@ -14,6 +14,7 @@ use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatureGroups;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureToGroup;
 use JustSteveKing\Laravel\FeatureFlags\Console\DeactivateFeature;
 use JustSteveKing\Laravel\FeatureFlags\Console\ActivateFeatureGroup;
+use JustSteveKing\Laravel\FeatureFlags\Console\DeactivateFeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewGroupsWithFeatures;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
@@ -63,6 +64,7 @@ class FeatureFlagsServiceProvider extends ServiceProvider
                 AddFeatureToGroup::class,
                 DeactivateFeature::class,
                 ActivateFeatureGroup::class,
+                DeactivateFeatureGroup::class,
                 ViewGroupsWithFeatures::class,
             ]);
         }
