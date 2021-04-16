@@ -11,7 +11,7 @@ trait NormaliseName
     public static function bootNormaliseName()
     {
         static::creating(function(Model $model) {
-            $model->name = strtolower($model->name);
+            $model->name = str_replace(strtolower($model->name), '-', ' ');
         });
     }
 }
