@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Models;
 
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Foundation\Auth\User;
 use JustSteveKing\Laravel\FeatureFlags\Models\Concerns\NormaliseName;
 use JustSteveKing\Laravel\FeatureFlags\Models\Builders\FeatureGroupBuilder;
 
