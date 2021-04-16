@@ -16,15 +16,16 @@ class AddFeature extends Command
     public function handle()
     {
         $featureName = $this->ask('Feature Name');
-        $description = $this->ask('Feature Description');
-        $active = $this->choice('Is the feature active', ['yes', 'no'], 'no');
-
         $existingGroup = Feature::name($featureName)->first();
 
-        if ($existingGroup) {
+        while ($existingGroup) {
             $this->alert('A feature already exists with this name');
-            return 1;
+            $featureName = $this->ask('Feature Name');
+            $existingGroup = Feature::name($featureName)->first();
         }
+
+        $description = $this->ask('Feature Description');
+        $active = $this->choice('Is the feature active', ['no', 'yes'], 'yes');
 
         Feature::create([
             'name' => $featureName,
