@@ -9,6 +9,7 @@ trait QueryByName
     public function name(string $name): self
     {
         $this->where('name', $name);
+
         return $this;
     }
 }
