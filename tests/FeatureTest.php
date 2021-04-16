@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace JustSteveKing\Laravel\FeatureFlags\Tests\Models;
+namespace JustSteveKing\Laravel\FeatureFlags\Tests;
 
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
-use JustSteveKing\Laravel\FeatureFlags\Tests\TestCase;
 
 class FeatureTest extends TestCase
 {

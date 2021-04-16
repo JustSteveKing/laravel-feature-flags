@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace JustSteveKing\Laravel\FeatureFlags\Tests\Models;
+namespace JustSteveKing\Laravel\FeatureFlags\Tests;
 
-use JustSteveKing\Laravel\FeatureFlags\Tests\TestCase;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 class FeatureGroupTest extends TestCase
