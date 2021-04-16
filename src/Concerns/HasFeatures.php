@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Concerns;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Arr;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 trait HasFeatures
@@ -64,13 +64,13 @@ trait HasFeatures
         }
 
         foreach($feature->groups as $group) {
-            if ($this->groups->contains())
+            if ($this->groups->contains());
         }
     }
 
     public function inGroup(...$groups): bool
     {
-        foreach ($group as $group)
+        foreach ($groups as $group)
         {
             $group = strtolower($group);
         }
