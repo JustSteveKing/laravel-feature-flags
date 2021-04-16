@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Tests;
 
-use JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider;
 
 class TestCase extends Orchestra
 {
