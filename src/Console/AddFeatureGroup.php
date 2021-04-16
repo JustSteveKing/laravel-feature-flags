@@ -16,15 +16,16 @@ class AddFeatureGroup extends Command
     public function handle()
     {
         $groupName = $this->ask('Group Name');
-        $description = $this->ask('Group Description');
-        $active = $this->choice('Is the group active', ['yes', 'no'], 'no');
-
         $existingGroup = FeatureGroup::name($groupName)->first();
 
         if ($existingGroup) {
             $this->alert('A group already exists with this name');
-            return 1;
+            $groupName = $this->ask('Group Name');
+            $existingGroup = FeatureGroup::name($groupName)->first();
         }
+
+        $description = $this->ask('Group Description');
+        $active = $this->choice('Is the group active', ['no', 'yes'], 'yes');
 
         FeatureGroup::create([
             'name' => $groupName,
