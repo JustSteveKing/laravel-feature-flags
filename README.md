@@ -6,6 +6,12 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
+<p align="center">
+
+![](banner.png)
+
+</p>
+
 A simple to use Feature Flag package for Laravel, allowing you to create Feature Groups and assign Users to them - while also being able to give users override access to given features outside of their groups.
 
 ## Installation
