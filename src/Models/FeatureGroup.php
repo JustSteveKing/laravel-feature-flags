@@ -24,14 +24,16 @@ class FeatureGroup extends Model
         'active' => 'boolean',
     ];
 
-    public function addFeature(Feature $feature): bool|null
+    public function addFeature(Feature $feature): void
     {
-        return $this->features()->attach($feature);
+        $this->features()->attach($feature);
     }
 
     public function hasFeature(string $featureName): bool
     {
-        return $this->features->contains('name', $featureName);
+        return $this->features()
+            ->firstWhere('active', true)
+            ->contains('name', $featureName);
     }
 
     public function removeFeature(Feature $feature): bool

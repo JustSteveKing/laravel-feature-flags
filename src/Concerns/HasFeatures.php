@@ -4,36 +4,131 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Arr;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
 
 trait HasFeatures
 {
-    /**
-     * User Feature Groups
-     */
-
-    public function leaveGroup(string $groupName)
+    public function giveFeature(...$features): self
     {
-        return $this->groups()->detach(FeatureGroup::name($groupName)->first()->id);
+        $features = $this->getAllFeatures(
+            features: Arr::flatten($features)
+        );
+
+        if (is_null($features)) {
+            return $this;
+        }
+
+        $this->features()->saveMany($features);
+
+        return $this;
     }
 
-    public function joinGroup(string $groupName): array
+    public function removeFeature(...$features): self
     {
-        return $this->addToGroup($groupName);
+        $features = $this->getAllFeatures(
+            features: Arr::flatten($features)
+        );
+
+        $this->features()->detach($features);
+
+        return $this;
     }
 
-    public function addToGroup(string $groupName): array
+    public function updateFeatures(...$features): self
     {
-        return $this->groups()->sync(FeatureGroup::firstOrCreate([
-            'name' => $groupName
-        ]));
+        $this->features()->detach();
+
+        return $this->giveFeature($features);
     }
 
-    public function inGroup(string $groupName)
+    public function hasFeature(string $feature)
     {
-        return $this->groups->contains('name', $groupName);
+        return $this->hasFeatureThroughGroup(
+            feature: $feature,
+        ) || $this->hasFeature(
+            feature: $feature,
+        );
+    }
+
+    public function hasFeatureThroughGroup(string $feature): bool
+    {
+        $feature = Feature::active()->name($feature)->first();
+
+        if (is_null($feature)) {
+            return false;
+        }
+
+        foreach($feature->groups as $group) {
+            if ($this->groups->contains())
+        }
+    }
+
+    public function inGroup(...$groups): bool
+    {
+        foreach ($group as $group)
+        {
+            $group = strtolower($group);
+        }
+
+        return !! FeatureGroup::active()
+            ->whereIn('name', $groups)
+            ->count();
+    }
+
+    public function leaveGroup(...$groups): self
+    {
+        $groups = $this->getAllGroups(
+            groups: Arr::flatten($groups)
+        );
+
+        $this->groups()->detach($groups);
+
+        return $this;
+    }
+
+    public function joinGroup(...$groups): self
+    {
+        $groups = $this->getAllGroups(
+            groups: Arr::flatten($groups)
+        );
+
+        if (is_null($groups)) {
+            return $this;
+        }
+
+        $this->groups()->saveMany($groups);
+
+        return $this;
+    }
+
+    public function addToGroup(...$groups): self
+    {
+        return $this->joinGroup(
+            groups: $groups,
+        );
+    }
+
+    protected function getAllFeatures(array $features): Collection
+    {
+        foreach ($features as $feature) {
+            $feature = strtolower($feature);
+        }
+
+        return Feature::active()->whereIn('name', $features)->get();
+    }
+
+    protected function getAllGroups(array $groups): Collection
+    {
+        foreach ($groups as $group) {
+            $group = strtolower($group);
+        }
+
+        return FeatureGroup::active()->whereIn('name', $groups)->get();
     }
 
     public function groupHasFeature(string $featureName): bool
@@ -41,27 +136,11 @@ trait HasFeatures
         return $this->groups->features->contains('name', $featureName);
     }
 
-    /**
-     * User Features
-     */
-
-    public function giveFeature(string $featureName)
+    protected function featureExists(string $featureName): bool
     {
-        return $this->features()->sync(Feature::firstOrCreate([
-            'name' => $featureName
-        ]));
-    }
+        $exists = Feature::name($featureName)->first();
 
-    public function hasFeature(string $featureName)
-    {
-        return $this->features->contains('name', $featureName);
-    }
-
-    public function removeFeature(string $featureName)
-    {
-        return $this->features()->detach(
-            Feature::name($featureName)->first()
-        );
+        return (is_null($exists)) ? false : true;
     }
 
     public function features(): BelongsToMany
