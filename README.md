@@ -199,6 +199,18 @@ You can pass through more than one feature group name, and pass them in a friend
 Route::middleware(['feature-group:beta-testers,internal,developer advocates'])->group(/* */);
 ```
 
+## Artisan Commands
+
+There are a number of artisan commands available for interacting with feature flags.
+```bash
+  feature-flags:add-feature                Add a new feature
+  feature-flags:add-feature-group          Add a new feature group
+  feature-flags:add-feature-to-group       Add a feature to a group
+  feature-flags:view-feature-groups        View feature groups
+  feature-flags:view-features              View features
+  feature-flags:view-groups-with-features  View groups with features
+```
+
 ## Testing
 
 ``` bash
