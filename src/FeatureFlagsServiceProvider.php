@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeature;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatures;
+use JustSteveKing\Laravel\FeatureFlags\Console\ActivateFeature;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewFeatureGroups;
 use JustSteveKing\Laravel\FeatureFlags\Console\AddFeatureToGroup;
+use JustSteveKing\Laravel\FeatureFlags\Console\DeactivateFeature;
+use JustSteveKing\Laravel\FeatureFlags\Console\ActivateFeatureGroup;
+use JustSteveKing\Laravel\FeatureFlags\Console\DeactivateFeatureGroup;
 use JustSteveKing\Laravel\FeatureFlags\Console\ViewGroupsWithFeatures;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
@@ -54,9 +58,13 @@ class FeatureFlagsServiceProvider extends ServiceProvider
             $this->commands([
                 AddFeature::class,
                 ViewFeatures::class,
+                ActivateFeature::class,
                 AddFeatureGroup::class,
                 ViewFeatureGroups::class,
                 AddFeatureToGroup::class,
+                DeactivateFeature::class,
+                ActivateFeatureGroup::class,
+                DeactivateFeatureGroup::class,
                 ViewGroupsWithFeatures::class,
             ]);
         }
