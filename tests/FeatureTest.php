@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Tests;
 
+use Illuminate\Support\Facades\Hash;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use JustSteveKing\Laravel\FeatureFlags\Models\FeatureGroup;
+use JustSteveKing\Laravel\FeatureFlags\Tests\Stubs\User;
 
 class FeatureTest extends TestCase
 {
@@ -75,5 +77,19 @@ class FeatureTest extends TestCase
         $feature->groups()->attach(FeatureGroup::find(1));
         $this->assertCount(1, $feature->groups);
         $this->assertTrue($feature->inGroup(FeatureGroup::first()->name));
+    }
+
+    /**
+     * @test
+     */
+    public function it_assigns_a_feature_to_a_user()
+    {
+        $user = User::create([
+            'name' => 'test user',
+            'email' => 'test@user.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $this->actingAs($user);
     }
 }
