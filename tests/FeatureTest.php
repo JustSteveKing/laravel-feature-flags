@@ -90,6 +90,14 @@ class FeatureTest extends TestCase
             'password' => Hash::make('password')
         ]);
 
-        $this->actingAs($user);
+        $feature = Feature::create([
+            'name' => 'test'
+        ]);
+
+        $user->giveFeature($feature->name);
+
+        $this->assertTrue(
+            $user->hasFeature($feature->name)
+        );
     }
 }

@@ -56,15 +56,20 @@ trait HasFeatures
 
     public function hasFeatureThroughGroup(string $feature): bool
     {
-        $feature = Feature::active()->name($feature)->first();
+        $feature = Feature::with(['groups'])->active()
+            ->name($feature)->first();
 
         if (is_null($feature)) {
             return false;
         }
 
-        foreach($feature->groups as $group) {
-            if ($this->groups->contains());
+        foreach ($feature->groups as $group) {
+            if (! is_null($group)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     public function inGroup(...$groups): bool
