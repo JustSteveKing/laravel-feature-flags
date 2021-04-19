@@ -45,13 +45,24 @@ trait HasFeatures
         return $this->giveFeature($features);
     }
 
-    public function hasFeature(string $feature)
+    public function hasFeature(string $feature): bool
     {
         return $this->hasFeatureThroughGroup(
             feature: $feature,
-        ) || $this->hasFeature(
+        ) || $this->hasFeatureDirect(
             feature: $feature,
         );
+    }
+
+    public function hasFeatureDirect(string $feature): bool
+    {
+        $feature = Feature::active()->name($feature)->first();
+
+        if (is_null($feature)) {
+            return false;
+        }
+
+        return $this->features->contains($feature);
     }
 
     public function hasFeatureThroughGroup(string $feature): bool
