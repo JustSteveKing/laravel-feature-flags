@@ -110,4 +110,24 @@ class FeatureGroupTest extends TestCase
             $user->hasFeature($feature->name)
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_checks_a_group_has_a_feature()
+    {
+        $feature = Feature::create([
+            'name' => 'test'
+        ]);
+
+        $group = FeatureGroup::create([
+            'name' => 'Test Group',
+        ]);
+
+        $group->addFeature($feature);
+
+        $this->assertTrue(
+            $group->hasFeature($feature->name)
+        );
+    }
 }

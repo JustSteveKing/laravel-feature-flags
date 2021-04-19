@@ -31,9 +31,7 @@ class FeatureGroup extends Model
 
     public function hasFeature(string $featureName): bool
     {
-        return $this->features()
-            ->firstWhere('active', true)
-            ->contains('name', $featureName);
+        return $this->features->contains('name', $featureName);
     }
 
     public function removeFeature(Feature $feature): bool
