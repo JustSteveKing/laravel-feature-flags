@@ -75,7 +75,7 @@ trait HasFeatures
         }
 
         foreach ($feature->groups as $group) {
-            if (! is_null($group)) {
+            if ($this->groups->contains($group)) {
                 return true;
             }
         }

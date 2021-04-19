@@ -105,5 +105,9 @@ class FeatureGroupTest extends TestCase
         $this->assertTrue(
             $user->inGroup($group->name)
         );
+
+        $this->assertTrue(
+            $user->hasFeature($feature->name)
+        );
     }
 }
