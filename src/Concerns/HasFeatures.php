@@ -123,6 +123,7 @@ trait HasFeatures
 
     public function addToGroup(...$groups): self
     {
+        dd($groups);
         return $this->joinGroup(
             groups: $groups,
         );
