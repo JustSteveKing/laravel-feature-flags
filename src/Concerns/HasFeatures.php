@@ -112,6 +112,8 @@ trait HasFeatures
             groups: Arr::flatten($groups)
         );
 
+        dd($groups);
+
         if (is_null($groups)) {
             return $this;
         }
@@ -123,7 +125,6 @@ trait HasFeatures
 
     public function addToGroup(...$groups): self
     {
-        dd($groups);
         return $this->joinGroup(
             groups: $groups,
         );
