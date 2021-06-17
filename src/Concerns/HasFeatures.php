@@ -150,7 +150,9 @@ trait HasFeatures
 
     public function groupHasFeature(string $featureName): bool
     {
-        return $this->groups->features->contains('name', $featureName);
+        return $this->hasFeatureThroughGroup(
+            feature: $featureName,
+        );
     }
 
     protected function featureExists(string $featureName): bool
