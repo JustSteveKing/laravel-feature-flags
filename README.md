@@ -22,10 +22,16 @@ You can install the package via composer:
 composer require juststeveking/laravel-feature-flags
 ```
 
+You can publish the migrations files with:
+
+```bash
+php artisan vendor:publish --provider="JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider" --tag="migrations"
+```
+
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider"
+php artisan vendor:publish --provider="JustSteveKing\Laravel\FeatureFlags\FeatureFlagsServiceProvider" --tag="config"
 ```
 
 This is the contents of the published config file:
