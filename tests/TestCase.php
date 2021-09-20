@@ -16,10 +16,10 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->loadLaravelMigrations();
+        $this->setUpDatabase();
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             FeatureFlagsServiceProvider::class,
@@ -39,5 +39,13 @@ class TestCase extends Orchestra
             'auth.providers.users.model',
             \JustSteveKing\Laravel\FeatureFlags\Tests\Stubs\User::class
         );
+    }
+
+    protected function setUpDatabase(): void
+    {
+        $this->loadLaravelMigrations();
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
     }
 }

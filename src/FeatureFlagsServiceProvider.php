@@ -19,16 +19,15 @@ use JustSteveKing\Laravel\FeatureFlags\Console\ViewGroupsWithFeatures;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-    }
-
     public function boot()
     {
         $this->publishes([
             __DIR__ . '/../config/feature-flags.php' => config_path('feature-flags.php')
-        ], 'feature-flags-config');
+        ], 'config');
+
+        $this->publishes([
+        __DIR__ . '/../database/migrations/' => database_path('migrations')
+        ], 'migrations');
 
 
         Blade::directive('feature', function ($feature) {
