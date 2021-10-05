@@ -49,10 +49,7 @@
         "laravel": {
             "providers": [
                 "JustSteveKing\\Laravel\\FeatureFlags\\FeatureFlagsServiceProvider"
-            ],
-            "aliases": {
-                "FeatureFlags": "JustSteveKing\\Laravel\\FeatureFlags\\FeatureFlagsFacade"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
