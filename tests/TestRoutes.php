@@ -27,22 +27,22 @@ trait TestRoutes
 
         $router->get('/feature', function (): Response {
             return response('can access feature');
-        })->middleware('feature:test-feature, test feature two');
+        })->middleware('feature:test-feature,test feature two');
 
         $router->get('/feature-group', function (): Response {
             return response('can access feature group');
-        })->middleware('feature-group:test-feature-group, test feature two');
+        })->middleware('feature-group:test-feature-group,test feature two');
 
         $router->prefix('/api')
             ->group(function (Router $router): void {
 
                 $router->get('/feature', function (): Response {
                     return response('can access feature');
-                })->middleware('api-feature:test-feature, test feature two');
+                })->middleware('api-feature:test-feature,test feature two');
 
                 $router->get('/feature-group', function (): Response {
                     return response('can access feature group');
-                })->middleware('api-feature-group:test-feature-group, test feature two');
+                })->middleware('api-feature-group:test-feature-group,test feature two');
             });
     }
 }

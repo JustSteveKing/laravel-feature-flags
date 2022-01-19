@@ -31,12 +31,29 @@ it('can access feature page via middleware', function (): void {
         'name' => 'test feature',
     ]);
 
+    $feature_two = Feature::create([
+        'name' => 'test feature two',
+    ]);
+
     $this->user->giveFeature($feature->name);
+    $this->user->giveFeature($feature_two->name);
 
     actingAs($this->user)
         ->get('/feature')
         ->assertSeeText('can access feature')
         ->assertStatus(200);
+});
+
+it('cannot access feature page when feature flag is not attached', function (): void {
+    $feature = Feature::create([
+        'name' => 'test feature',
+    ]);
+
+    $this->user->giveFeature($feature->name);
+
+    actingAs($this->user)
+        ->get('/feature')
+        ->assertRedirect('/');
 });
 
 it('can access feature group page via middleware', function (): void {
