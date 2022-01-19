@@ -31,7 +31,7 @@ trait TestRoutes
 
         $router->get('/feature-group', function (): Response {
             return response('can access feature group');
-        })->middleware('feature-group:test-feature-group,test feature two');
+        })->middleware('feature-group:test-feature-group,test feature group two');
 
         $router->prefix('/api')
             ->group(function (Router $router): void {
@@ -42,7 +42,7 @@ trait TestRoutes
 
                 $router->get('/feature-group', function (): Response {
                     return response('can access feature group');
-                })->middleware('api-feature-group:test-feature-group,test feature two');
+                })->middleware('api-feature-group:test-feature-group,test feature group two');
             });
     }
 }

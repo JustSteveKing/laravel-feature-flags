@@ -17,8 +17,8 @@ class GroupMiddleware
             if (! $request->user()->inGroup($group)) {
                 return abort(config('feature-flags.middleware.status_code'));
             }
-        }
 
-        return $next($request);
+            return $next($request);
+        }
     }
 }
