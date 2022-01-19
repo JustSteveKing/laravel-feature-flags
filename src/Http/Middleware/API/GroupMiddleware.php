@@ -12,13 +12,13 @@ class GroupMiddleware
     public function handle(Request $request, Closure $next, string ...$groups): mixed
     {
         foreach ($groups as $group) {
-            $group = str_replace($group, '-', ' ');
+            $group = str_replace('-', ' ', $group);
+
+            if (! $request->user()->inGroup($group)) {
+                return abort(config('feature-flags.middleware.status_code'));
+            }
         }
 
-        if ($request->user()->inGroup($groups)) {
-            return $next($request);
-        }
-
-        return abort(config('feature-flag.middleware.status_code'));
+        return $next($request);
     }
 }

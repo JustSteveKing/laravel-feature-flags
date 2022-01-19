@@ -12,7 +12,7 @@ class GroupMiddleware
     public function handle(Request $request, Closure $next, string ...$groups): mixed
     {
         foreach ($groups as $group) {
-            $group = str_replace($group, '-', ' ');
+            $group = str_replace('-', ' ', $group);
 
             if ($request->user()->inGroup($group)) {
                 return $next($request);

@@ -12,11 +12,11 @@ class FeatureMiddleware
     public function handle(Request $request, Closure $next, string ...$features): mixed
     {
         foreach ($features as $feature) {
-            $feature = str_replace($feature, '-', ' ');
-        }
+            $feature = str_replace('-', ' ', $feature);
 
-        if (! $request->user()->hasFeature($features)) {
-            return abort(config('feature-flag.middleware.status_code'));
+            if (! $request->user()->hasFeature($feature)) {
+                return abort(config('feature-flags.middleware.status_code'));
+            }
         }
 
         return $next($request);
