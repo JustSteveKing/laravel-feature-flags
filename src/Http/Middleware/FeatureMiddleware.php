@@ -13,14 +13,14 @@ class FeatureMiddleware
     {
         foreach ($features as $feature) {
             $feature = str_replace($feature, '-', ' ');
-        }
 
-        if (! $request->user()->hasFeature($features)) {
-            if (config('feature-flag.middleware.mode') === 'abort') {
-                return abort(config('feature-flag.middleware.status_code'));
+            if (!$request->user()->hasFeature($feature)) {
+                if (config('feature-flags.middleware.mode') === 'abort') {
+                    return abort(config('feature-flags.middleware.status_code'));
+                }
+
+                return redirect(config('feature-flags.middleware.redirect_route'));
             }
-
-            return redirect(config('feature-flag.middleware.redirect_route'));
         }
 
         return $next($request);

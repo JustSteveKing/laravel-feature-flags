@@ -13,16 +13,18 @@ class GroupMiddleware
     {
         foreach ($groups as $group) {
             $group = str_replace($group, '-', ' ');
+
+            if ($request->user()->inGroup($group)) {
+                return $next($request);
+            }
+
+            if (config('feature-flags.middleware.mode') === 'abort') {
+                return abort(config('feature-flags.middleware.status_code'));
+            }
+
+            return redirect(config('feature-flags.middleware.redirect_route'));
         }
 
-        if ($request->user()->inGroup($groups)) {
-            return $next($request);
-        }
-
-        if (config('feature-flag.middleware.mode') === 'abort') {
-            return abort(config('feature-flag.middleware.status_code'));
-        }
-
-        return redirect(config('feature-flag.middleware.redirect_route'));
+        return $next($request);
     }
 }
