@@ -33,15 +33,16 @@ trait TestRoutes
             return response('can access feature group');
         })->middleware('feature-group:test-feature-group, test feature two');
 
-        $router->prefix('/api', function (Router $router): void {
+        $router->prefix('/api')
+            ->group(function (Router $router): void {
 
-            $router->get('/feature', function (): Response {
-                return response('can access feature');
-            })->middleware('api-feature:test-feature, test feature two');
+                $router->get('/feature', function (): Response {
+                    return response('can access feature');
+                })->middleware('api-feature:test-feature, test feature two');
 
-            $router->get('/feature-group', function (): Response {
-                return response('can access feature group');
-            })->middleware('api-feature-group:test-feature-group, test feature two');
-        });
+                $router->get('/feature-group', function (): Response {
+                    return response('can access feature group');
+                })->middleware('api-feature-group:test-feature-group, test feature two');
+            });
     }
 }
