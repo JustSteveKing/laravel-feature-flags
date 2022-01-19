@@ -17,14 +17,12 @@ class GroupMiddleware
             if ($request->user()->inGroup($group)) {
                 return $next($request);
             }
-
-            if (config('feature-flags.middleware.mode') === 'abort') {
-                return abort(config('feature-flags.middleware.status_code'));
-            }
-
-            return redirect(config('feature-flags.middleware.redirect_route'));
         }
 
-        return $next($request);
+        if (config('feature-flags.middleware.mode') === 'abort') {
+            return abort(config('feature-flags.middleware.status_code'));
+        }
+
+        return redirect(config('feature-flags.middleware.redirect_route'));
     }
 }

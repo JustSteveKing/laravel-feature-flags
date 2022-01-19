@@ -58,7 +58,7 @@ it('cannot access feature page when feature flag is not attached', function (): 
 
 it('can access feature group page via middleware', function (): void {
     $group = FeatureGroup::create([
-        'name' => 'test feature group',
+        'name' => 'test feature group two',
     ]);
 
     $this->user->joinGroup($group->name);

@@ -14,11 +14,11 @@ class GroupMiddleware
         foreach ($groups as $group) {
             $group = str_replace('-', ' ', $group);
 
-            if (! $request->user()->inGroup($group)) {
-                return abort(config('feature-flags.middleware.status_code'));
+            if ($request->user()->inGroup($group)) {
+                return $next($request);
             }
-
-            return $next($request);
         }
+
+        return abort(config('feature-flags.middleware.status_code'));
     }
 }
