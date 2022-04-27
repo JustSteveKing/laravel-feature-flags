@@ -200,11 +200,13 @@ it('can update an expiry date', function(): void {
         'expires_at' => \Carbon\Carbon::now()
     ]);
 
+    $feature = Feature::first()->expires_at;
+
     $this->artisan('feature-flags:extend-feature')
         ->expectsQuestion('Feature Name to Extend', 'test feature')
         ->expectsQuestion('When do you want your feature to expire? (Number of Days)',  7)
         ->expectsOutput("Updated 'test feature' feature expiry date")
         ->assertExitCode(0);
 
-    expect(Feature::first()->expires_at)->toEqual(\Carbon\Carbon::now()->addDays(7));
+    expect(Feature::first()->expires_at)->toEqual($feature->addDays(7));
 });
