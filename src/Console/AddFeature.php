@@ -27,10 +27,15 @@ class AddFeature extends Command
         $description = $this->ask('Feature Description');
         $active = $this->choice('Is the feature active', ['no', 'yes'], 'yes');
 
+        if(config('feature-flags.enable_time_bombs')) {
+            $expires_at = $this->ask('When do you want your feature to expire? (Number of Days)', 0);
+        }
+
         Feature::create([
             'name' => $featureName,
             'description' => $description,
             'active' => $active == 'yes',
+            'expires_at' => isset($expires_at) ? \Carbon\Carbon::now()->addDays($expires_at) : null
         ]);
 
         $this->info("Created '{$featureName}' feature");

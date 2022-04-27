@@ -36,4 +36,16 @@ return [
         */
         'status_code' => 404,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enabling Time bombs for Features
+    |--------------------------------------------------------------------------
+    |
+    | This option controls whether an exception will be thrown if a feature
+    | has expired. See Martin Fowler's blog post on this:
+    | https://martinfowler.com/articles/feature-toggles.html#WorkingWithFeature-flaggedSystems
+    |
+    */
+    'enable_time_bombs' => false,
 ];

@@ -15,9 +15,11 @@ class ViewFeatures extends Command
 
     public function handle()
     {
-        $features = Feature::all(['name', 'description', 'active'])->toArray();
+        $features = Feature::withoutEvents(function() {
+            return Feature::all(['name', 'description', 'active', 'expires_at'])->toArray();
+        });
 
-        $headers = ['Name', 'Description', 'Active'];
+        $headers = ['Name', 'Description', 'Active', 'Expires At'];
 
         $this->table($headers, $features);
     }
