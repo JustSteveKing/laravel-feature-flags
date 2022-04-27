@@ -20,6 +20,7 @@
         "illuminate/support": "^9.0.1"
     },
     "require-dev": {
+        "doctrine/dbal": "^3.3",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0.0",
         "pestphp/pest": "^1.21.1",
