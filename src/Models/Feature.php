@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\App;
 use JustSteveKing\Laravel\FeatureFlags\Models\Concerns\NormaliseName;
 use JustSteveKing\Laravel\FeatureFlags\Models\Builders\FeatureBuilder;
 
@@ -30,7 +31,10 @@ class Feature extends Model
     public static function booted()
     {
         static::retrieved(function(Feature $feature) {
-            if(config('feature-flags.enable_time_bombs')) {
+            if(
+                config('feature-flags.enable_time_bombs')
+                && ! App::environment(config('feature-flags.time_bomb_environments'))
+            ) {
                 return (! is_null($feature->expires_at) && Carbon::now() >= $feature->expires_at) ? throw new Exception(sprintf('The Feature has expired - %s', $feature->name)) : true;
             }
             return true;

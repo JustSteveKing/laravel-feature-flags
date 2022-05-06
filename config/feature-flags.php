@@ -48,4 +48,16 @@ return [
     |
     */
     'enable_time_bombs' => false,
+
+    /*
+     |--------------------------------------------------------------------------
+     | Environments that will NOT trigger Time Bombs
+     |--------------------------------------------------------------------------
+     |
+     | This option controls which environment settings will prevent time bomb
+     | exceptions from being thrown. To trigger in all environments, leave
+     | the array as empty.
+     |
+     */
+     'time_bomb_environments' => ['production']
 ];

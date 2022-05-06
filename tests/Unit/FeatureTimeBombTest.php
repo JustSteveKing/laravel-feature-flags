@@ -8,11 +8,23 @@ use Illuminate\Support\Facades\Config;
 
 beforeEach(function(): void {
     Config::set('feature-flags.enable_time_bombs', true);
+    Config::set('feature-flags.time_bomb_environments', ['production']);
 });
 
 afterAll(function(): void {
     Config::set('feature-flags.enable_time_bombs', false);
 });
+
+function tryException() {
+    $exception = null;
+
+    try {
+        Feature::all();
+    } catch(Throwable $exception) {}
+
+    // Assert No Exception is thrown
+    test()->assertNull($exception, 'Unexpected Exception was thrown');
+}
 
 it('can create a feature with an expiry date', function(): void {
    Feature::create([
@@ -22,19 +34,6 @@ it('can create a feature with an expiry date', function(): void {
 
    expect(Feature::all())
        ->toHaveCount(1);
-});
-
-it('Does not throw an Exception when time bombs are disabled', function(): void {
-    Config::set('feature-flags.enable_time_bombs', false);
-
-    Feature::create([
-        'name' => 'Expired Feature',
-        'expires_at' => Carbon::now()->subDay()
-    ]);
-
-    expect(Feature::all())->toHaveCount(1);
-    // Assert No Exception is thrown
-    $this->assertTrue(true);
 });
 
 it('throws an Exception when time bombs are enabled', function(): void {
@@ -70,9 +69,7 @@ it('Does not throw an Exception when an expiry date is 1 second in the future', 
         'expires_at' => Carbon::now()->addSecond()
     ]);
 
-    Feature::all();
-    // Assert No Exception is thrown
-    $this->assertTrue(true);
+    test()->tryException();
 });
 
 it('Does not throw an Exception when Expiry date is Null', function(): void {
@@ -81,7 +78,16 @@ it('Does not throw an Exception when Expiry date is Null', function(): void {
        'expires_at' => null
    ]);
 
-    Feature::all();
-    // Assert No Exception is thrown
-    $this->assertTrue(true);
+   test()->tryException();
 });
+
+it('Throws an exception when the environments array is empty', function() : void {
+    Config::set('feature-flags.time_bomb_environments', []);
+
+    Feature::create([
+        'name' => 'Expired Feature',
+        'expires_at' => Carbon::now()->subSecond()
+    ]);
+
+    Feature::all();
+})->throws(Exception::class, 'The Feature has expired - expired feature');
