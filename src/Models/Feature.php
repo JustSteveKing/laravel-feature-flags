@@ -31,16 +31,15 @@ class Feature extends Model
     public static function booted()
     {
         static::retrieved(function(Feature $feature) {
-            if(
-                config('feature-flags.enable_time_bombs')
-                && ! App::environment(config('feature-flags.time_bomb_environments'))
-            ) {
+            $timeBombsAreEnabled = config('feature-flags.enable_time_bombs');
+            $environmentAllowsTimeBombs = ! App::environment(config('feature-flags.time_bomb_environments'));
+
+            if($timeBombsAreEnabled && $environmentAllowsTimeBombs) {
                 $featureHasExpired = Carbon::now()->isAfter($feature->expires_at);
 
                 if ($featureHasExpired) {
                     throw new Exception(sprintf('The Feature has expired - %s', $feature->name));
                 }
-
                 return true;
             }
             return true;
