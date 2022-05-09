@@ -36,6 +36,17 @@ it('can create a feature with an expiry date', function(): void {
        ->toHaveCount(1);
 });
 
+it('Does not throw an Exception when time bombs are disabled', function(): void {
+    Config::set('feature-flags.enable_time_bombs', false);
+
+    Feature::create([
+        'name' => 'Expired Feature',
+        'expires_at' => Carbon::now()->subDay()
+    ]);
+
+    test()->tryException();
+});
+
 it('throws an Exception when time bombs are enabled', function(): void {
     Feature::create([
         'name' => 'Expired Feature',
