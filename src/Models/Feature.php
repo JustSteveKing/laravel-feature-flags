@@ -35,7 +35,13 @@ class Feature extends Model
                 config('feature-flags.enable_time_bombs')
                 && ! App::environment(config('feature-flags.time_bomb_environments'))
             ) {
-                return (! is_null($feature->expires_at) && Carbon::now() >= $feature->expires_at) ? throw new Exception(sprintf('The Feature has expired - %s', $feature->name)) : true;
+                $featureHasExpired = Carbon::now()->isAfter($feature->expires_at);
+
+                if ($featureHasExpired) {
+                    throw new Exception(sprintf('The Feature has expired - %s', $feature->name));
+                }
+
+                return true;
             }
             return true;
         });
