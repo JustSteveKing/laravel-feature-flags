@@ -112,9 +112,6 @@ trait HasFeatures
             groups: Arr::flatten($groups)
         );
 
-        // TODO? Fix groups? Maybe?
-        // dd($groups);
-
         if (is_null($groups)) {
             return $this;
         }
@@ -160,7 +157,7 @@ trait HasFeatures
     {
         $exists = Feature::name($featureName)->first();
 
-        return (is_null($exists)) ? false : true;
+        return !is_null($exists);
     }
 
     public function features(): BelongsToMany
