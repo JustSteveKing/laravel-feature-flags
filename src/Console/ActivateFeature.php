@@ -13,7 +13,7 @@ class ActivateFeature extends Command
 
     protected $description = 'Activates a feature';
 
-    public function handle()
+    public function handle(): int
     {
         $featureName = $this->ask('Feature name to activate');
         $feature = Feature::name($featureName)->first();

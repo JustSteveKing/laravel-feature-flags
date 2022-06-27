@@ -13,7 +13,7 @@ class AddFeature extends Command
 
     protected $description = 'Add a new feature';
 
-    public function handle()
+    public function handle(): int
     {
         $featureName = $this->ask('Feature Name');
         $existingFeature = Feature::name($featureName)->first();

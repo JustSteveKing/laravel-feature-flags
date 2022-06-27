@@ -13,7 +13,7 @@ class DeactivateFeatureGroup extends Command
 
     protected $description = 'Deactivates a feature group';
 
-    public function handle()
+    public function handle(): int
     {
         $groupName = $this->ask('Group name to deactivate');
         $group = FeatureGroup::name($groupName)->first();

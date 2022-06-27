@@ -28,7 +28,7 @@ class Feature extends Model
         'expires_at' => 'datetime'
     ];
 
-    public static function booted()
+    public static function booted(): void
     {
         static::retrieved(function(Feature $feature) {
             $timeBombsAreEnabled = config('feature-flags.enable_time_bombs');

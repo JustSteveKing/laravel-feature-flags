@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace JustSteveKing\Laravel\FeatureFlags\Console;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 
@@ -14,7 +13,7 @@ class ExtendFeature extends Command
 
     protected $description = 'Extend a features expiry date';
 
-    public function handle()
+    public function handle(): int
     {
         if(! config('feature-flags.enable_time_bombs')) $this->info("Time bombs are not enabled!");
 

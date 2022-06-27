@@ -14,7 +14,7 @@ class AddFeatureToGroup extends Command
 
     protected $description = 'Add a feature to a group';
 
-    public function handle()
+    public function handle(): int
     {
         $featureName = $this->ask('Feature Name');
         $feature = Feature::name($featureName)->first();

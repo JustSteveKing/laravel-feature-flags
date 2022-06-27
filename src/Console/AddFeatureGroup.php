@@ -13,7 +13,7 @@ class AddFeatureGroup extends Command
 
     protected $description = 'Add a new feature group';
 
-    public function handle()
+    public function handle(): int
     {
         $groupName = $this->ask('Group Name');
         $existingGroup = FeatureGroup::name($groupName)->first();

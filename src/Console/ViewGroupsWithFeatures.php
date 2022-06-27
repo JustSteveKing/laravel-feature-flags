@@ -13,7 +13,7 @@ class ViewGroupsWithFeatures extends Command
 
     protected $description = 'View groups with features';
 
-    public function handle()
+    public function handle(): void
     {
         $groups = FeatureGroup::all();
         $headers = ['Group', 'Features'];

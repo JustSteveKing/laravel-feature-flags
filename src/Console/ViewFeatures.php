@@ -13,7 +13,7 @@ class ViewFeatures extends Command
 
     protected $description = 'View features';
 
-    public function handle()
+    public function handle(): void
     {
         $features = Feature::withoutEvents(function() {
             return Feature::all(['name', 'description', 'active', 'expires_at'])->toArray();
