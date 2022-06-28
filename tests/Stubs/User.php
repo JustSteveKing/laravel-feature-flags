@@ -10,7 +10,7 @@ use JustSteveKing\Laravel\FeatureFlags\Concerns\HasFeatures;
 class User extends AuthUser
 {
     use HasFeatures;
-    
+
     public $guarded = [];
 
     public $table = 'users';

@@ -36,4 +36,28 @@ return [
         */
         'status_code' => 404,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enabling Time bombs for Features
+    |--------------------------------------------------------------------------
+    |
+    | This option controls whether an exception will be thrown if a feature
+    | has expired. See Martin Fowler's blog post on this:
+    | https://martinfowler.com/articles/feature-toggles.html#WorkingWithFeature-flaggedSystems
+    |
+    */
+    'enable_time_bombs' => false,
+
+    /*
+     |--------------------------------------------------------------------------
+     | Environments that will NOT trigger Time Bombs
+     |--------------------------------------------------------------------------
+     |
+     | This option controls which environment settings will prevent time bomb
+     | exceptions from being thrown. To trigger in all environments, leave
+     | the array as empty.
+     |
+     */
+     'time_bomb_environments' => ['production']
 ];

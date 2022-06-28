@@ -45,6 +45,10 @@ return [
 
         'status_code' => 404,
     ],
+    
+    'enable_time_bombs' => false,
+    
+    'time_bomb_environments' => ['production']
 ];
 ```
 
@@ -151,6 +155,36 @@ if (auth()->user()->hasFeature('user level feature')) {
     // The user has access to this feature as a user or through a group.
 }
 ```
+
+## Timebombs for Features
+
+A common use case for Feature Flags is to allow developers to add new functionality without breaking existing code.
+
+This process is great when paired with a solid CI/CD pipeline. But the biggest drawback to this is residual technical debt that can
+occur when developers forget about removing implemented flags across a code base.
+
+To handle this, users of this package can utilise Timebombs! Timebombs are used to cause Feature Flags to throw an exception
+when a flag should have been removed from the code base.
+
+To use Timebombs, you will need to explicitly enable them within the config ('enable_time_bombs' => true).
+And define which environments you do not want exceptions to be thrown. (This is particularly useful with CI/CD, as you will want to throw exceptions locally, in CI and on staging environments but NOT on production).
+
+### Defining when a timebomb should throw an exception
+
+Once Timebombs are enabled, when creating a new Flag, you will be asked when you want your flag to expire (This is number of days).
+When the current time surpasses that expiration date, then your feature flag will throw an exception.
+
+To extend a flag, you can use the handy command
+
+```php
+php artisan feature-flags:extend-feature
+```
+
+Where you will be prompted to define how many more days are required before the flag should throw an exception again.
+
+### Further reading
+
+To learn more on Feature flags and Timebombs, there is a great article by Martin Fowler [Here](https://martinfowler.com/articles/feature-toggles.html).
 
 ## Template Usage
 

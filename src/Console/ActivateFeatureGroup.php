@@ -13,7 +13,7 @@ class ActivateFeatureGroup extends Command
 
     protected $description = 'Activates a feature group';
 
-    public function handle()
+    public function handle(): int
     {
         $groupName = $this->ask('Group name to activate');
         $group = FeatureGroup::name($groupName)->first();

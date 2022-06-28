@@ -13,7 +13,7 @@ class ViewFeatureGroups extends Command
 
     protected $description = 'View feature groups';
 
-    public function handle()
+    public function handle(): void
     {
         $groups = FeatureGroup::all(['name', 'description', 'active'])->toArray();
 
