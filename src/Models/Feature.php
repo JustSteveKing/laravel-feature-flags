@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace JustSteveKing\Laravel\FeatureFlags\Models;
 
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\App;
-use JustSteveKing\Laravel\FeatureFlags\Models\Concerns\NormaliseName;
+use JustSteveKing\Laravel\FeatureFlags\Exceptions\ExpiredFeatureException;
 use JustSteveKing\Laravel\FeatureFlags\Models\Builders\FeatureBuilder;
+use JustSteveKing\Laravel\FeatureFlags\Models\Concerns\NormaliseName;
 
 class Feature extends Model
 {
@@ -30,15 +30,15 @@ class Feature extends Model
 
     public static function booted(): void
     {
-        static::retrieved(function(Feature $feature) {
+        static::retrieved(function (Feature $feature) {
             $timeBombsAreEnabled = config('feature-flags.enable_time_bombs');
-            $environmentAllowsTimeBombs = ! App::environment(config('feature-flags.time_bomb_environments'));
+            $environmentAllowsTimeBombs = !App::environment(config('feature-flags.time_bomb_environments'));
 
-            if($timeBombsAreEnabled && $environmentAllowsTimeBombs) {
+            if ($timeBombsAreEnabled && $environmentAllowsTimeBombs) {
                 $featureHasExpired = Carbon::now()->isAfter($feature->expires_at);
 
                 if ($featureHasExpired) {
-                    throw new Exception(sprintf('The Feature has expired - %s', $feature->name));
+                    throw ExpiredFeatureException::create($feature->name);
                 }
                 return true;
             }

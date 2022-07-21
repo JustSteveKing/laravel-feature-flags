@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Carbon\Carbon;
+use JustSteveKing\Laravel\FeatureFlags\Exceptions\ExpiredFeatureException;
 use JustSteveKing\Laravel\FeatureFlags\Models\Feature;
 use Illuminate\Support\Facades\Config;
 
@@ -54,7 +55,7 @@ it('throws an Exception when time bombs are enabled', function(): void {
     ]);
 
     Feature::all();
-})->throws(Exception::class, 'The Feature has expired - expired feature');
+})->throws(ExpiredFeatureException::class, 'The Feature expired feature has expired.');
 
 it('casts the Expiry date to Carbon', function(): void {
    Feature::create([
@@ -72,7 +73,7 @@ it('throws an Exception when 1 second past an expiry date', function(): void {
     ]);
 
     Feature::all();
-})->throws(Exception::class, 'The Feature has expired - expired feature');
+})->throws(ExpiredFeatureException::class, 'The Feature expired feature has expired.');
 
 it('Does not throw an Exception when an expiry date is 1 second in the future', function(): void {
     Feature::create([
@@ -101,4 +102,4 @@ it('Throws an exception when the environments array is empty', function() : void
     ]);
 
     Feature::all();
-})->throws(Exception::class, 'The Feature has expired - expired feature');
+})->throws(ExpiredFeatureException::class, 'The Feature expired feature has expired.');
