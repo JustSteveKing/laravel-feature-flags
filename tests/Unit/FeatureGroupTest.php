@@ -44,6 +44,10 @@ it('assigns a feature group to a user', function(): void {
         'password' => Hash::make('password')
     ]);
 
+    expect($user)
+        ->inGroup($this->group->name)
+        ->toBeFalse();
+
     $user->joinGroup($this->group->name);
 
     expect($user)
