@@ -12,6 +12,8 @@
 
 </p>
 
+**I recommend using laravel/pennant for any future Feature Flag needs. This package will be frozen as is with no updates planned.**
+
 A simple to use Feature Flag package for Laravel, allowing you to create Feature Groups and assign Users to them - while also being able to give users override access to given features outside of their groups.
 
 ## Installation
