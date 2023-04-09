@@ -61,15 +61,23 @@ it('shows feature to user when feature group has feature', function(): void {
 });
 
 it('hides feature to user that dont have feature', function(): void {
+    Feature::create([
+        'name' => 'Test',
+    ]);
+
     $view = $this->actingAs($this->user)->blade("@feature('test') active feature @endfeature");
 
-    $view->assertSee('');
+    $view->assertDontSee('active feature');
 });
 
 it('hides feature to user that not in feature group', function(): void {
+    FeatureGroup::create([
+        'name' => 'Test Group',
+    ]);
+
     $view = $this->actingAs($this->user)->blade("@featuregroup('test group') active feature @endfeaturegroup");
 
-    $view->assertSee('');
+    $view->assertDontSee('active feature');
 });
 
 it('hides feature to user when feature group dont have feature', function(): void {
@@ -81,5 +89,5 @@ it('hides feature to user when feature group dont have feature', function(): voi
 
     $view = $this->actingAs($this->user)->blade("@groupfeature('test') active feature @endgroupfeature");
 
-    $view->assertSee('');
+    $view->assertDontSee('active feature');
 });

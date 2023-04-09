@@ -90,9 +90,11 @@ trait HasFeatures
             $group = strtolower($group);
         }
 
-        return !! FeatureGroup::active()
+        return $this
+            ->groups()
+            ->active()
             ->whereIn('name', $groups)
-            ->count();
+            ->count() > 0;
     }
 
     public function leaveGroup(...$groups): self
